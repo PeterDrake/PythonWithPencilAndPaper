@@ -1,0 +1,15 @@
+# How to Use This Book
+
+For each section, there is a page of exercises, an explanation, and an answer key. To maximize your learning:
+1. Read the example exercise and its answer.
+2. Go through the entire page, writing your best guess for each exercise, *even though the concepts haven't been explained yet*. Your intuitions are stronger than you think. More importantly, the act of carefully reading and pondering the questions will prime your mind for the next steps.
+3. Read the explanation on the back of the page.
+4. Go through the page again, writing an improved guess for any answers you want to revise.
+5. Look at the answer key. For any exercises where you didn't write the correct answer, try to understand why the given answer is correct.
+
+# Why This Book?
+* A lot of simple practice will improve your knowledge of, and confidence with, Python syntax and concepts.
+* Research [citation needed] shows that writing by hand produces better learning than typing or merely being shown the answers.
+* Research [citation needed -- see think/pair/share] shows that taking a guess first is more effective than looking at the answer.
+* Paper avoids all issues of access to hardware, software, internet, and electricity.
+* No computer means no setup hassles and no distractions.
