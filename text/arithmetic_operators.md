@@ -1,36 +1,3 @@
-# Exercises
-`2 + 2`
-`4`
-
-`2 + 3`
-
-`4 - 1`
-
-`3 - 8`
-
-`2 * 4`
-
-`8 / 2`
-
-`7 / 2`
-
-`7 // 2`
-
-`34 // 10`
-
-`34 % 10`
-
-`2 ** 3`
-
-`2 + 3 * 5`
-
-`2 + (3 * 5)`
-
-`(2 + 3) * 5`
-
-`1 + 2 * 3 - 4 ** 2 / 4`
-
-# Explanation
 Numbers can be combined with familiar arithmetic operators. `+` and `-` perform addition and subtraction. The multiplication operator is `*`.
 
 There are three division operators:
@@ -47,4 +14,3 @@ Some operators have higher precedence than others, so they are performed first:
 
 Parentheses can be used to control which operations are performed first.
 
-# Answers
