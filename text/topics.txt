@@ -2,15 +2,19 @@ string access and slicing
 arithmetic operators
 variables
 string operators
+quotation marks
 calling functions (len, abs, etc.)
 lists (showing access, slicing, and operators work just like they do for strings)
 comparisons (including ==, introducing bools)
 types
 list functions
 list comprehensions
+string methods
+f-strings
 sets
 dictionaries
 references and equality
+tuples (including (un)packing)
 defining functions
 print and input
 if
@@ -18,3 +22,4 @@ while
 for
 break and continue
 importing
+numpy
