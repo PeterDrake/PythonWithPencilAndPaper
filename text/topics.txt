@@ -1,0 +1,20 @@
+string access and slicing
+arithmetic operators
+variables
+string operators
+calling functions (len, abs, etc.)
+lists (showing access, slicing, and operators work just like they do for strings)
+comparisons (including ==, introducing bools)
+types
+list functions
+list comprehensions
+sets
+dictionaries
+references and equality
+defining functions
+print and input
+if
+while
+for
+break and continue
+importing

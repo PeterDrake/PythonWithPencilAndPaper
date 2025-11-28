@@ -4,12 +4,15 @@ For each page, there is:
 * a .md file with the explanation of the syntax or concepts.
 
 Two programs convert this into human-readable output:
-* One produces markdown (and thence pdf) of three pages: the questions, the explanation, and the answers.
+* One produces markdown (and thence pdf) of three pages: the questions (with room for written answers), the explanation, and the answers.
 * Another produces an interactive, text-only quizzing program, suitable for use with a screen reader.
+
+These programs should also be able to produce the entire book given the list of topics.
 
 # Question Types
 * Evaluate an expression.
-* Write code (or fill in a blank in code) to produce a value.
+* Write code (or fill in a blank in code) to produce (or print) a value.
+* Show what a program prints.
 * Draw a diagram.
 * Write code (or fill in a blank in code) to produce a data structure matching a diagram.
 
