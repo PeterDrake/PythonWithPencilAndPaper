@@ -1,5 +1,4 @@
-# Write the value of each expression
-2 + 2  # The answer is provided for the first exercise of each page
+2 + 2
 
 2 + 3
 
