@@ -12,5 +12,4 @@ Some operators have higher precedence than others, so they are performed first:
 * `*`, `/`, `//`, and `%` have the next highest
 * `+` and `-` have the lowest
 
-Parentheses can be used to control which operations are performed first.
-
+Parentheses can be used to ensure that particular operations are performed earlier.
