@@ -1,3 +1,4 @@
+# Arithmetic Operators
 Numbers can be combined with familiar arithmetic operators. `+` and `-` perform addition and subtraction. The multiplication operator is `*`.
 
 There are three division operators:
