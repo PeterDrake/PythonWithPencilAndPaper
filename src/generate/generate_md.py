@@ -1,51 +1,42 @@
 from io import StringIO
 from markdown_pdf import MarkdownPdf, Section
 
-CSS = 'table { width:100%; table-layout:fixed; }\n'
-# CSS = ''
-CSS += 'tr th:nth-of-type(1) { width: 10%; }\n'
-CSS += 'tr th:nth-of-type(2) { width:45%; }\n'
-CSS += 'tr th:nth-of-type(3) { width:45%; }\n'
-# CSS += '</style>'+
-       # ' '.join(f'table th:nth-of-type({col}) {{ table-layout: fixed width: {percent}%; }}' for col, percent in {1:10, 2:45, 3:45}.items()) +
-       # ' </style>')
-print(CSS)
+CSS = 'body {line-height: 2}\n'
 
-def generate_exercise_markdown(topic):
+def generate_exercises(topic, title, show_answers=False):
     builder = StringIO()  # For efficiency, as we're building a very large string
-    # add_boilerplate(builder)
-    generate_exercises(topic, builder)
-    load_explanation(topic, builder)
-    generate_exercises(topic, builder, True)
-    result = builder.getvalue()
-    builder.close()
-    return result
-
-# def add_boilerplate(builder):
-#     widths = ' '.join(f'table th:nth-of-type({col}) {{ width: {percent}%; }}' for col, percent in {1:10, 2:45, 3:45}.items())
-#     builder.write(f'<style> {widths} </style>\n')
-
-def generate_exercises(topic, show_answers=False):
-    builder = StringIO()  # For efficiency, as we're building a very large string
-    # builder.write(f'|Number|Expression|Value|\n')
-    # builder.write(f'|:---|:---|:---|\n')
+    if show_answers:
+        builder.write(title + ' (Solutions)\n')
+    else:
+        builder.write(title + ' (Exercises)\n')
     with open(f'../{topic}.py') as infile:
         line = infile.readline().rstrip()  # First example includes answer
         n = 1
-        builder.write(f'{n}. `{line:<30}`  \n`{eval(line)}`  \n')
-        builder.write('  \n')
+        generate_question(n, line, builder, True)
         while line := infile.readline():
             line = line.rstrip()
             if line != '':
                 n += 1
-                builder.write(f'{n}. `{line:<30}`  \n')
-                if show_answers:
-                    builder.write(f'<ins>`{eval(line)}`</ins>  \n')
-                else:
-                    builder.write(f'<ins>{'&nbsp;'*20}</ins>  \n')
-                builder.write('  \n')
+                generate_question(n, line, builder, show_answers)
     result = builder.getvalue()
     builder.close()
+    return result
+
+def generate_question(n, line, builder, show_answer=False):
+    padded_line = pad_with_nonbreaking_spaces(line, 30, True) + '&nbsp;&nbsp;'
+    builder.write(f'{n}. `{padded_line}`')
+    if show_answer:
+        builder.write(f'<ins>`{pad_with_nonbreaking_spaces(str(eval(line)), 30, False)}`</ins>  \n')
+    else:
+        builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30, False)}`</ins>  \n')
+
+def pad_with_nonbreaking_spaces(text, n, left):
+    result = ''
+    if left:
+        result += '&nbsp;' * (n - len(text))
+    result += text
+    if not left:
+        result += '&nbsp;' * (n - len(text))
     return result
 
 def load_explanation(topic):
@@ -58,10 +49,11 @@ def load_explanation(topic):
     return result
 
 topic = 'arithmetic_operators'
+with open(f'../../text/{topic}.md') as infile:
+    title = infile.readline().rstrip()
 pdf = MarkdownPdf()
-pdf.add_section(Section(generate_exercises('arithmetic_operators')))
+pdf.add_section(Section(generate_exercises('arithmetic_operators', title)), user_css=CSS)
 pdf.add_section(Section(load_explanation('arithmetic_operators')))
-pdf.add_section(Section(generate_exercises('arithmetic_operators', True)))
+pdf.add_section(Section(generate_exercises('arithmetic_operators', title, True)), user_css=CSS)
 pdf.save(f'../../output/{topic}.pdf')
-# with open(f'../../output/{topic}.md', 'w') as outfile:
-#     outfile.write(generate_exercise_markdown('arithmetic_operators'))
+
