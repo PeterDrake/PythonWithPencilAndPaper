@@ -51,7 +51,8 @@ def load_explanation(topic):
 # TODO Read this from a file
 topics = ['string_indexing',
           'string_slicing',
-          'arithmetic_operators']
+          'arithmetic_operators',
+          'variables']
 pdf = MarkdownPdf()
 solutions = []
 for topic in topics:
