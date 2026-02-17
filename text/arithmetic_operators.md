@@ -1,5 +1,5 @@
 # Arithmetic Operators
-Numbers can be combined with familiar arithmetic operators. `+` and `-` perform addition and subtraction. The multiplication operator is `*`.
+Numbers can be combined with familiar arithmetic *operators*. `+` and `-` perform addition and subtraction. The multiplication operator is `*`.
 
 There are three division operators:
 * `/` performs standard division. The answer always includes a decimal point, even if it happens to be an integer.
