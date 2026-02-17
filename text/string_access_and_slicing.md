@@ -16,3 +16,5 @@ Any or all of the three numbers specifying a slice may be omitted.
 * If no stop is provided, the slice stops at the end of the string.
   * ... unless the step is negative, in which case the slice stops at the beginning of the string.
 * If no step is provided, a step of 1 is used. The second colon can be omitted in this case.
+
+If the stop is beyond the end of the string, the slice ends where the string ends.
