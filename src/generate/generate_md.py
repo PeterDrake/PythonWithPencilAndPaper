@@ -48,12 +48,15 @@ def load_explanation(topic):
     builder.close()
     return result
 
-topic = 'arithmetic_operators'
-with open(f'../../text/{topic}.md') as infile:
-    title = infile.readline().rstrip()
+topics = ['string_access_and_slicing', 'arithmetic_operators']
 pdf = MarkdownPdf()
-pdf.add_section(Section(generate_exercises('arithmetic_operators', title)), user_css=CSS)
-pdf.add_section(Section(load_explanation('arithmetic_operators')))
-pdf.add_section(Section(generate_exercises('arithmetic_operators', title, True)), user_css=CSS)
-pdf.save(f'../../output/{topic}.pdf')
-
+solutions = []
+for topic in topics:
+    with open(f'../../text/{topic}.md') as infile:
+        title = infile.readline().rstrip()
+    pdf.add_section(Section(generate_exercises(topic, title)), user_css=CSS)
+    pdf.add_section(Section(load_explanation(topic)))
+    solutions.append(Section(generate_exercises(topic, title, True)))
+for solution in solutions:
+    pdf.add_section(solution, user_css=CSS)
+pdf.save(f'../../output/book.pdf')

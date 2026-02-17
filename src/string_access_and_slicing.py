@@ -20,7 +20,7 @@
 
 'airspace'[3:]
 
-'remote'[4:1:-1]
+'remote'[4:0:-1]
 
 'duplicate'[::]
 
