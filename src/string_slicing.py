@@ -1,13 +1,3 @@
-'python'[0]
-
-'python'[1]
-
-'python'[3]
-
-'python'[-1]
-
-'python'[-3]
-
 'abandon'[0:2]
 
 'abandon'[1:5]

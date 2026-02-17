@@ -48,7 +48,10 @@ def load_explanation(topic):
     builder.close()
     return result
 
-topics = ['string_access_and_slicing', 'arithmetic_operators']
+# TODO Read this from a file
+topics = ['string_indexing',
+          'string_slicing',
+          'arithmetic_operators']
 pdf = MarkdownPdf()
 solutions = []
 for topic in topics:

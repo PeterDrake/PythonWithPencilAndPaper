@@ -1,4 +1,5 @@
-string access and slicing
+string indexing
+string slicing
 arithmetic operators
 variables
 string operators
