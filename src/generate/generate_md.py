@@ -4,31 +4,59 @@ from markdown_pdf import MarkdownPdf, Section
 CSS = 'body {line-height: 2}\n'
 
 def generate_exercises(topic, title, show_answers=False):
+    context = {}
     builder = StringIO()  # For efficiency, as we're building a very large string
     if show_answers:
         builder.write(title + ' (Solutions)\n')
     else:
         builder.write(title + ' (Exercises)\n')
+    new_question = True
+    first_answer_still_needed = True
     with open(f'../{topic}.py') as infile:
         line = infile.readline().rstrip()  # First example includes answer
         n = 1
-        generate_question(n, line, builder, True)
+        new_question = generate_question(n, line, builder, context, first_answer_still_needed, new_question)
+        # first_answer_still_needed = first_answer_still_needed and not new_question
         while line := infile.readline():
             line = line.rstrip()
-            if line != '':
+            if line == '':
+                new_question = True
+                first_answer_still_needed = False
                 n += 1
-                generate_question(n, line, builder, show_answers)
+                print(f'n is now {n}')
+            else:
+                new_question = generate_question(n, line, builder, context, first_answer_still_needed or show_answers, new_question)
     result = builder.getvalue()
     builder.close()
     return result
 
-def generate_question(n, line, builder, show_answer=False):
+def generate_question(n, line, builder, context, show_answer=False, new_question=True):
     padded_line = pad_with_nonbreaking_spaces(line, 30, True) + '&nbsp;&nbsp;'
-    builder.write(f'{n}. `{padded_line}`')
-    if show_answer:
-        builder.write(f'<ins>`{pad_with_nonbreaking_spaces(str(eval(line)), 30, False)}`</ins>  \n')
-    else:
-        builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30, False)}`</ins>  \n')
+    try:
+        print(f'Trying to evaluate {line}')
+        eval(line, context)
+        print(f'{line} is an expression')
+        expression = True
+        if new_question:
+            builder.write(f'{n}. `{padded_line}`')
+        else:
+            # TODO Adjust for length of str(n)
+            builder.write(f'   `{padded_line}`')
+        if show_answer:
+            builder.write(f'<ins>`{pad_with_nonbreaking_spaces(str(eval(line, context)), 30, False)}`</ins>  \n')
+        else:
+            builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30, False)}`</ins>  \n')
+    except:  # TODO Should we catch SyntaxError specifically?
+        # This is a statement, not an expression
+        print(f'{line} is not an expression')
+        expression = False
+        exec(line, context)
+        if new_question:
+            builder.write(f'{n}. `{padded_line}`  \n')
+        else:
+            # TODO Adjust for length of str(n)
+            builder.write(f'   `{padded_line}`  \n')
+    return expression
 
 def pad_with_nonbreaking_spaces(text, n, left):
     result = ''
@@ -53,6 +81,7 @@ topics = ['string_indexing',
           'string_slicing',
           'arithmetic_operators',
           'variables']
+# topics = ['variables']
 pdf = MarkdownPdf()
 solutions = []
 for topic in topics:
@@ -60,6 +89,7 @@ for topic in topics:
         title = infile.readline().rstrip()
     pdf.add_section(Section(generate_exercises(topic, title)), user_css=CSS)
     pdf.add_section(Section(load_explanation(topic)))
+    print('\n==== Generating solutions\n')
     solutions.append(Section(generate_exercises(topic, title, True)))
 for solution in solutions:
     pdf.add_section(solution, user_css=CSS)
