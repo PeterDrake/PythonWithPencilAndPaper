@@ -43,7 +43,7 @@ def generate_question(n, line, builder, context, show_answer=False, new_question
             # TODO Adjust for length of str(n)
             builder.write(f'   `{padded_line}`')
         if show_answer:
-            builder.write(f'<ins>`{pad_with_nonbreaking_spaces(str(eval(line, context)), 30, False)}`</ins>  \n')
+            builder.write(f'<ins>`{pad_with_nonbreaking_spaces(repr(eval(line, context)), 30, False)}`</ins>  \n')
         else:
             builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30, False)}`</ins>  \n')
     except:  # TODO Should we catch SyntaxError specifically?
