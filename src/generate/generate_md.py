@@ -80,8 +80,8 @@ def load_explanation(topic):
 topics = ['string_indexing',
           'string_slicing',
           'arithmetic_operators',
-          'variables']
-# topics = ['variables']
+          'variables',
+          'string_operators']
 pdf = MarkdownPdf()
 solutions = []
 for topic in topics:
