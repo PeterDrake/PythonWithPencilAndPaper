@@ -81,7 +81,8 @@ topics = ['string_indexing',
           'string_slicing',
           'arithmetic_operators',
           'variables',
-          'string_operators']
+          'string_operators',
+          'quotation_marks']
 pdf = MarkdownPdf()
 solutions = []
 for topic in topics:

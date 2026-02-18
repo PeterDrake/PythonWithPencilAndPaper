@@ -1,5 +1,5 @@
 # String Indexing
-*Strings* of text can be surrounded by single quotation marks (`'`).
+*Strings* of text may be surrounded by single quotation marks (`'`).
 
 Putting a number in square brackets (`[]`) after a string gives the single character at that *index* (position). Indices are zero based, so the first character is at index 0.
 
