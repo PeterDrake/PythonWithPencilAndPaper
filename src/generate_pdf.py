@@ -12,7 +12,7 @@ def generate_exercises(topic, title, show_answers=False):
         builder.write(title + ' (Exercises)\n')
     new_question = True
     first_answer_still_needed = True
-    with open(f'../{topic}.py') as infile:
+    with open(f'{topic}.py') as infile:
         line = infile.readline().rstrip()  # First example includes answer
         n = 1
         new_question = generate_question(n, line, builder, context, first_answer_still_needed, new_question)
@@ -23,7 +23,6 @@ def generate_exercises(topic, title, show_answers=False):
                 new_question = True
                 first_answer_still_needed = False
                 n += 1
-                print(f'n is now {n}')
             else:
                 new_question = generate_question(n, line, builder, context, first_answer_still_needed or show_answers, new_question)
     result = builder.getvalue()
@@ -33,9 +32,7 @@ def generate_exercises(topic, title, show_answers=False):
 def generate_question(n, line, builder, context, show_answer=False, new_question=True):
     padded_line = pad_with_nonbreaking_spaces(line, 30, True) + '&nbsp;&nbsp;'
     try:
-        print(f'Trying to evaluate {line}')
         eval(line, context)
-        print(f'{line} is an expression')
         expression = True
         if new_question:
             builder.write(f'{n}. `{padded_line}`')
@@ -48,7 +45,6 @@ def generate_question(n, line, builder, context, show_answer=False, new_question
             builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30, False)}`</ins>  \n')
     except:  # TODO Should we catch SyntaxError specifically?
         # This is a statement, not an expression
-        print(f'{line} is not an expression')
         expression = False
         exec(line, context)
         if new_question:
@@ -69,7 +65,7 @@ def pad_with_nonbreaking_spaces(text, n, left):
 
 def load_explanation(topic):
     builder = StringIO()  # For efficiency, as we're building a very large string
-    with open(f'../../text/{topic}.md') as infile:
+    with open(f'../text/{topic}.md') as infile:
         while line := infile.readline():
             builder.write(line)
     result = builder.getvalue()
@@ -86,13 +82,13 @@ topics = ['string_indexing',
           'calling_functions']
 pdf = MarkdownPdf()
 solutions = []
+# TODO Add intro.md, plus a blank page to keep exercises on fronts of pages and explanations on backs
 for topic in topics:
-    with open(f'../../text/{topic}.md') as infile:
+    with open(f'../text/{topic}.md') as infile:
         title = infile.readline().rstrip()
     pdf.add_section(Section(generate_exercises(topic, title)), user_css=CSS)
     pdf.add_section(Section(load_explanation(topic)))
-    print('\n==== Generating solutions\n')
     solutions.append(Section(generate_exercises(topic, title, True)))
 for solution in solutions:
     pdf.add_section(solution, user_css=CSS)
-pdf.save(f'../../output/book.pdf')
+pdf.save(f'../output/book.pdf')
