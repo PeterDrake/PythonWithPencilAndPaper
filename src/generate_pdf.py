@@ -82,7 +82,7 @@ topics = ['string_indexing',
           'calling_functions']
 pdf = MarkdownPdf()
 solutions = []
-# TODO Add intro.md, plus a blank page to keep exercises on fronts of pages and explanations on backs
+# TODO Add README.md, plus a blank page to keep exercises on fronts of pages and explanations on backs
 for topic in topics:
     with open(f'../text/{topic}.md') as infile:
         title = infile.readline().rstrip()
