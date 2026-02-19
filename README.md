@@ -1,6 +1,6 @@
 # Copyright
 
-Copyright 2026 by Peter Drake. Permission is granted for classroom use.
+Copyright 2026 by Peter Drake. Permission is granted for individual or classroom use.
 
 # Repository Note
 
