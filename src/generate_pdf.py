@@ -81,7 +81,8 @@ topics = [
     'string_operators',
     'quotation_marks',
     'calling_functions',
-    'lists'
+    'lists',
+    'comparisons'
     ]
 pdf = MarkdownPdf()
 solutions = []
