@@ -11,6 +11,8 @@ nums
 len(nums)
 
 nest = [[6, 7], [1, 1, 3, 8]]
+nest[1]
+
 nest[1][2]
 
 left = [1, 2, 3]
