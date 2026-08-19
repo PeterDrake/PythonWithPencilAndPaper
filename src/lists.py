@@ -25,6 +25,3 @@ left * 2
 
 [2, 3] in left
 
-alias = left
-left[0] = 10
-alias
