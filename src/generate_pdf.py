@@ -73,13 +73,15 @@ def load_explanation(topic):
     return result
 
 # TODO Read this from a file
-topics = ['string_indexing',
-          'string_slicing',
-          'arithmetic_operators',
-          'variables',
-          'string_operators',
-          'quotation_marks',
-          'calling_functions']
+topics = [
+    'string_indexing',
+    'string_slicing',
+    'arithmetic_operators',
+    'variables',
+    'string_operators',
+    'quotation_marks',
+    'calling_functions'
+    ]
 pdf = MarkdownPdf()
 solutions = []
 # TODO Add README.md, plus a blank page to keep exercises on fronts of pages and explanations on backs

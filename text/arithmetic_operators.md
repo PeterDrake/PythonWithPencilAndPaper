@@ -6,7 +6,7 @@ There are three division operators:
 * `//` performs integer division, throwing away any remainder.
 * `%`, the *modulo* or *remainder* operator, keeps *only* the remainder.
 
-The `**` operator performs exponentiation, so `5 ** 2` computes $5^2$.
+The `**` operator performs exponentiation, so `5 ** 2` computes 5<sup>2</sup>.
 
 Some operators have higher precedence than others, so they are performed first:
 * `**` has the highest precedence
@@ -14,3 +14,9 @@ Some operators have higher precedence than others, so they are performed first:
 * `+` and `-` have the lowest
 
 Parentheses can be used to ensure that particular operations are performed earlier.
+
+<!--- This is a comment -->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });
+</script>
