@@ -83,7 +83,7 @@ topics = [
     'calling_functions',
     'lists',
     'comparisons',
-    '_types'
+    'types_'
     ]
 pdf = MarkdownPdf()
 solutions = []
