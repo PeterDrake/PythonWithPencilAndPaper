@@ -84,7 +84,8 @@ topics = [
     'lists',
     'comparisons',
     'types_',
-    'methods'
+    'methods',
+    'list_comprehensions'
     ]
 pdf = MarkdownPdf()
 solutions = []
