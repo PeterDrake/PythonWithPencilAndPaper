@@ -10,7 +10,6 @@ comparisons (including ==, introducing bools)
 types
 methods
 list comprehensions
-string methods
 f-strings
 sets
 dictionaries
