@@ -36,13 +36,17 @@ def generate_question(n, line, builder, context, last_line, show_answer=False, n
     padded_line = pad_with_nonbreaking_spaces(line, 30, True) + '&nbsp;&nbsp;'
     # print(f'LINE is <{line}>, last_line is {last_line}')
     if last_line:
-        eval(line, context)
+        # eval(line, context)
         if new_question:
             builder.write(f'{n}. `{padded_line}`')
         else:
             # TODO Adjust for length of str(n)
             builder.write(f'   `{padded_line}`')
         if show_answer:
+            print(f'LINE: {line}')
+            print(f'EVAL: {eval(line, context)}')
+            print(f'REPR: {repr(eval(line, context))}')
+            print(f'PADDED: {pad_with_nonbreaking_spaces(repr(eval(line, context)), 30, False)}')
             builder.write(f'<ins>`{pad_with_nonbreaking_spaces(repr(eval(line, context)), 30, False)}`</ins>  \n')
         else:
             builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30, False)}`</ins>  \n')
@@ -58,7 +62,7 @@ def pad_with_nonbreaking_spaces(text, n, left):
     result = ''
     if left:
         result += '&nbsp;' * (n - len(text))
-    result += text
+    result += text.replace(' ', '&nbsp;')  # Otherwise markdown collapses multiple spaces
     if not left:
         result += '&nbsp;' * (n - len(text))
     return result
@@ -74,18 +78,19 @@ def load_explanation(topic):
 
 # TODO Read this from a file
 topics = [
-    'string_indexing',
-    'string_slicing',
-    'arithmetic_operators',
-    'variables',
-    'string_operators',
-    'quotation_marks',
-    'calling_functions',
-    'lists',
-    'comparisons',
-    'types_',
-    'methods',
-    'list_comprehensions'
+    # 'string_indexing',
+    # 'string_slicing',
+    # 'arithmetic_operators',
+    # 'variables',
+    # 'string_operators',
+    # 'quotation_marks',
+    # 'calling_functions',
+    # 'lists',
+    # 'comparisons',
+    # 'types_',
+    # 'methods',
+    # 'list_comprehensions',
+    'f_strings'
     ]
 pdf = MarkdownPdf()
 solutions = []
