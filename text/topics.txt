@@ -8,7 +8,7 @@ calling functions (len, abs, etc.)
 lists (showing access, slicing, and operators work just like they do for strings)
 comparisons (including ==, introducing bools)
 types
-list functions
+methods
 list comprehensions
 string methods
 f-strings

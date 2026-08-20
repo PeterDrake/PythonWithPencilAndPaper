@@ -1,12 +1,12 @@
 # Comparisons
 There are several operators for comparing things:
 
-`<` less than  
-`<=` less than or equal to  
-`==` equal  
-`>=` greater than or equal to  
-`>` greater than  
-`!=` not equal to  
+* `<` less than  
+* `<=` less than or equal to  
+* `==` equal  
+* `>=` greater than or equal to  
+* `>` greater than  
+* `!=` not equal to  
 
 The resulting value is either `True` or `False`.
 

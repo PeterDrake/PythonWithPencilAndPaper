@@ -18,3 +18,7 @@ s = 'python'
 s[0:len(s)]
 
 max(1, min(2, 3))
+
+sorted(s)
+
+s

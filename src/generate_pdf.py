@@ -13,27 +13,30 @@ def generate_exercises(topic, title, show_answers=False):
     new_question = True
     first_answer_still_needed = True
     with open(f'{topic}.py') as infile:
-        line = infile.readline().rstrip()  # First example includes answer
+        previous_line = infile.readline().rstrip()  # First example includes answer
         n = 1
-        new_question = generate_question(n, line, builder, context, first_answer_still_needed, new_question)
-        # first_answer_still_needed = first_answer_still_needed and not new_question
         while line := infile.readline():
             line = line.rstrip()
             if line == '':
+                generate_question(n, previous_line, builder, context, True, first_answer_still_needed or show_answers, new_question)
                 new_question = True
                 first_answer_still_needed = False
                 n += 1
-            else:
-                new_question = generate_question(n, line, builder, context, first_answer_still_needed or show_answers, new_question)
+            elif previous_line != '':
+                generate_question(n, previous_line, builder, context, False, first_answer_still_needed or show_answers, new_question)
+                new_question = False
+            previous_line = line
+        if previous_line != '':
+            generate_question(n, previous_line, builder, context, True, first_answer_still_needed or show_answers, new_question)
     result = builder.getvalue()
     builder.close()
     return result
 
-def generate_question(n, line, builder, context, show_answer=False, new_question=True):
+def generate_question(n, line, builder, context, last_line, show_answer=False, new_question=True):
     padded_line = pad_with_nonbreaking_spaces(line, 30, True) + '&nbsp;&nbsp;'
-    try:
+    # print(f'LINE is <{line}>, last_line is {last_line}')
+    if last_line:
         eval(line, context)
-        expression = True
         if new_question:
             builder.write(f'{n}. `{padded_line}`')
         else:
@@ -43,16 +46,13 @@ def generate_question(n, line, builder, context, show_answer=False, new_question
             builder.write(f'<ins>`{pad_with_nonbreaking_spaces(repr(eval(line, context)), 30, False)}`</ins>  \n')
         else:
             builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30, False)}`</ins>  \n')
-    except:  # TODO Should we catch SyntaxError specifically?
-        # This is a statement, not an expression
-        expression = False
+    else:
         exec(line, context)
         if new_question:
             builder.write(f'{n}. `{padded_line}`  \n')
         else:
             # TODO Adjust for length of str(n)
             builder.write(f'   `{padded_line}`  \n')
-    return expression
 
 def pad_with_nonbreaking_spaces(text, n, left):
     result = ''
@@ -83,7 +83,8 @@ topics = [
     'calling_functions',
     'lists',
     'comparisons',
-    'types_'
+    'types_',
+    'methods'
     ]
 pdf = MarkdownPdf()
 solutions = []

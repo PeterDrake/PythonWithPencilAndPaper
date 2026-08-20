@@ -3,11 +3,11 @@ Every value has a *type*. Conversely, each type is the set of values that have t
 
 Types we have seen so far include:
 
-`int` Integer  
-`float` Number including a decimal point or scientific notation, even if it happens to be an integer  
-`str` String  
-`list` List  
-`bool` Boolean logical value: `True` or `False`
+* `int` Integer  
+* `float` Number including a decimal point or scientific notation, even if it happens to be an integer  
+* `str` String  
+* `list` List  
+* `bool` Boolean logical value: `True` or `False`
 
 The built-in `type` function returns the type of its argument. For example, `type(20)` returns `<class 'int'>`. This is the `int` type; the reason for the more elaborate notation is beyond the scope of this book.
 

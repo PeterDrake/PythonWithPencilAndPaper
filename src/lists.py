@@ -10,6 +10,8 @@ nums
 
 len(nums)
 
+sorted([4, 1, 3, 2])
+
 nest = [[6, 7], [1, 1, 3, 8]]
 nest[1]
 
