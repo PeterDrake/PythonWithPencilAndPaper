@@ -86,7 +86,8 @@ topics = [
     'defining_functions',
     'if',
     'while',
-    'for'
+    'for',
+    'break_continue'
     ]
 pdf = MarkdownPdf()
 solutions = []
