@@ -4,6 +4,7 @@ from markdown_pdf import MarkdownPdf, Section
 CSS = 'body {line-height: 2}\n'
 
 def generate_exercises(topic, title, show_answers=False):
+    # print(f'TOPIC: {topic}')
     context = {}
     builder = StringIO()  # For efficiency, as we're building a very large string
     if show_answers:
@@ -24,6 +25,8 @@ def generate_exercises(topic, title, show_answers=False):
                 buffer = []
             else:
                 buffer.append(line)
+        if buffer:  # Generate last question of page, which is not followed by a blank line
+            generate_question(n, buffer, builder, context, show_answers)
     result = builder.getvalue()
     builder.close()
     return result
@@ -31,6 +34,7 @@ def generate_exercises(topic, title, show_answers=False):
 def generate_question(n, lines, builder, context, show_answers):
     if len(lines) > 1:  # There are some preliminary statements before the expression
         exec('\n'.join(lines[:-1]), context)
+        # print(f'CONTEXT: {'\n'.join(lines[:-1])}')
         padded_line = pad_with_nonbreaking_spaces(lines[0], 30) + '&nbsp;&nbsp;'
         builder.write(f'{n}. `{padded_line}`  \n')
         for line in lines[1:-1]:
@@ -38,6 +42,7 @@ def generate_question(n, lines, builder, context, show_answers):
             builder.write(f'   `{padded_line}`  \n')
     # Now deal with the expression itself
     padded_line = pad_with_nonbreaking_spaces(lines[-1], 30) + '&nbsp;&nbsp;'
+    # print(f'EXPRESSION: {lines[-1]}')
     if len(lines) == 1:
         builder.write(f'{n}. `{padded_line}`')
     else:
@@ -77,7 +82,8 @@ topics = [
     'sets',
     'dictionaries',
     'equality',
-    'tuples'
+    'tuples',
+    'defining_functions'
     ]
 pdf = MarkdownPdf()
 solutions = []
