@@ -33,8 +33,8 @@ def generate_exercises(topic, title, show_answers=False):
 
 def generate_question(n, lines, builder, context, show_answers):
     if len(lines) > 1:  # There are some preliminary statements before the expression
-        exec('\n'.join(lines[:-1]), context)
         # print(f'CONTEXT: {'\n'.join(lines[:-1])}')
+        exec('\n'.join(lines[:-1]), context)
         padded_line = pad_with_nonbreaking_spaces(lines[0], 30) + '&nbsp;&nbsp;'
         builder.write(f'{n}. `{padded_line}`  \n')
         for line in lines[1:-1]:
@@ -83,7 +83,9 @@ topics = [
     'dictionaries',
     'equality',
     'tuples',
-    'defining_functions'
+    'defining_functions',
+    'if',
+    'while'
     ]
 pdf = MarkdownPdf()
 solutions = []
