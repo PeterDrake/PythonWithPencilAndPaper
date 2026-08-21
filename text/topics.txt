@@ -13,7 +13,7 @@ list comprehensions
 f-strings
 sets
 dictionaries
-references and equality
+equality
 tuples (including (un)packing)
 defining functions
 print and input

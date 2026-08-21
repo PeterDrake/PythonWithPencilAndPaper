@@ -88,7 +88,8 @@ topics = [
     'list_comprehensions',
     'f_strings',
     'sets',
-    'dictionaries'
+    'dictionaries',
+    'equality'
     ]
 pdf = MarkdownPdf()
 solutions = []
