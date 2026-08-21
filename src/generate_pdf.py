@@ -10,49 +10,42 @@ def generate_exercises(topic, title, show_answers=False):
         builder.write(title + ' (Solutions)\n')
     else:
         builder.write(title + ' (Exercises)\n')
-    new_question = True
-    first_answer_still_needed = True
     with open(f'{topic}.py') as infile:
-        previous_line = infile.readline().rstrip()  # First example includes answer
+        buffer = []  # Each batch of consecutive lines is accumulated here
         n = 1
         while line := infile.readline():
             line = line.rstrip()
             if line == '':
-                generate_question(n, previous_line, builder, context, True, first_answer_still_needed or show_answers, new_question)
-                new_question = True
-                first_answer_still_needed = False
-                n += 1
-            elif previous_line != '':
-                generate_question(n, previous_line, builder, context, False, first_answer_still_needed or show_answers, new_question)
-                new_question = False
-            previous_line = line
-        if previous_line != '':
-            generate_question(n, previous_line, builder, context, True, first_answer_still_needed or show_answers, new_question)
+                if buffer:
+                    generate_question(n, buffer, builder, context, show_answers)
+                    n += 1
+                else:
+                    print(f'Multiple blank lines in {topic}.py')
+                buffer = []
+            else:
+                buffer.append(line)
     result = builder.getvalue()
     builder.close()
     return result
 
-def generate_question(n, line, builder, context, last_line, show_answer=False, new_question=True):
-    padded_line = pad_with_nonbreaking_spaces(line, 30) + '&nbsp;&nbsp;'
-    # print(f'LINE is <{line}>, last_line is {last_line}')
-    if last_line:
-        # eval(line, context)
-        if new_question:
-            builder.write(f'{n}. `{padded_line}`')
-        else:
-            # TODO Adjust for length of str(n)
-            builder.write(f'   `{padded_line}`')
-        if show_answer:
-            builder.write(f'<ins>`{pad_with_nonbreaking_spaces(repr(eval(line, context)), 30)}`</ins>  \n')
-        else:
-            builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30)}`</ins>  \n')
-    else:
-        exec(line, context)
-        if new_question:
-            builder.write(f'{n}. `{padded_line}`  \n')
-        else:
-            # TODO Adjust for length of str(n)
+def generate_question(n, lines, builder, context, show_answers):
+    if len(lines) > 1:  # There are some preliminary statements before the expression
+        exec('\n'.join(lines[:-1]), context)
+        padded_line = pad_with_nonbreaking_spaces(lines[0], 30) + '&nbsp;&nbsp;'
+        builder.write(f'{n}. `{padded_line}`  \n')
+        for line in lines[1:-1]:
+            padded_line = pad_with_nonbreaking_spaces(line, 30) + '&nbsp;&nbsp;'
             builder.write(f'   `{padded_line}`  \n')
+    # Now deal with the expression itself
+    padded_line = pad_with_nonbreaking_spaces(lines[-1], 30) + '&nbsp;&nbsp;'
+    if len(lines) == 1:
+        builder.write(f'{n}. `{padded_line}`')
+    else:
+        builder.write(f'   `{padded_line}`')
+    if n == 1 or show_answers:
+        builder.write(f'<ins>`{pad_with_nonbreaking_spaces(repr(eval(lines[-1], context)), 30)}`</ins>  \n')
+    else:
+        builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30)}`</ins>  \n')
 
 def pad_with_nonbreaking_spaces(text, n):
     return f'{text:<{n}}'.replace(' ', '&nbsp;')
