@@ -16,7 +16,6 @@ dictionaries
 equality
 tuples (including (un)packing)
 defining functions
-print and input
 if
 while
 for
