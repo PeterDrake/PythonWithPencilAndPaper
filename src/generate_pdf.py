@@ -89,7 +89,8 @@ topics = [
     'f_strings',
     'sets',
     'dictionaries',
-    'equality'
+    'equality',
+    'tuples'
     ]
 pdf = MarkdownPdf()
 solutions = []
