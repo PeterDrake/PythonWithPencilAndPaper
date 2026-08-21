@@ -33,7 +33,7 @@ def generate_exercises(topic, title, show_answers=False):
     return result
 
 def generate_question(n, line, builder, context, last_line, show_answer=False, new_question=True):
-    padded_line = pad_with_nonbreaking_spaces(line, 30, True) + '&nbsp;&nbsp;'
+    padded_line = pad_with_nonbreaking_spaces(line, 30) + '&nbsp;&nbsp;'
     # print(f'LINE is <{line}>, last_line is {last_line}')
     if last_line:
         # eval(line, context)
@@ -43,9 +43,9 @@ def generate_question(n, line, builder, context, last_line, show_answer=False, n
             # TODO Adjust for length of str(n)
             builder.write(f'   `{padded_line}`')
         if show_answer:
-            builder.write(f'<ins>`{pad_with_nonbreaking_spaces(repr(eval(line, context)), 30, False)}`</ins>  \n')
+            builder.write(f'<ins>`{pad_with_nonbreaking_spaces(repr(eval(line, context)), 30)}`</ins>  \n')
         else:
-            builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30, False)}`</ins>  \n')
+            builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30)}`</ins>  \n')
     else:
         exec(line, context)
         if new_question:
@@ -54,14 +54,8 @@ def generate_question(n, line, builder, context, last_line, show_answer=False, n
             # TODO Adjust for length of str(n)
             builder.write(f'   `{padded_line}`  \n')
 
-def pad_with_nonbreaking_spaces(text, n, left):
-    result = ''
-    if left:
-        result += '&nbsp;' * (n - len(text))
-    result += text.replace(' ', '&nbsp;')  # Otherwise markdown collapses multiple spaces
-    if not left:
-        result += '&nbsp;' * (n - len(text))
-    return result
+def pad_with_nonbreaking_spaces(text, n):
+    return f'{text:<{n}}'.replace(' ', '&nbsp;')
 
 def load_explanation(topic):
     builder = StringIO()  # For efficiency, as we're building a very large string
