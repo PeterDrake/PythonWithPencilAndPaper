@@ -43,10 +43,6 @@ def generate_question(n, line, builder, context, last_line, show_answer=False, n
             # TODO Adjust for length of str(n)
             builder.write(f'   `{padded_line}`')
         if show_answer:
-            print(f'LINE: {line}')
-            print(f'EVAL: {eval(line, context)}')
-            print(f'REPR: {repr(eval(line, context))}')
-            print(f'PADDED: {pad_with_nonbreaking_spaces(repr(eval(line, context)), 30, False)}')
             builder.write(f'<ins>`{pad_with_nonbreaking_spaces(repr(eval(line, context)), 30, False)}`</ins>  \n')
         else:
             builder.write(f'<ins>`{pad_with_nonbreaking_spaces("", 30, False)}`</ins>  \n')
@@ -78,19 +74,20 @@ def load_explanation(topic):
 
 # TODO Read this from a file
 topics = [
-    # 'string_indexing',
-    # 'string_slicing',
-    # 'arithmetic_operators',
-    # 'variables',
-    # 'string_operators',
-    # 'quotation_marks',
-    # 'calling_functions',
-    # 'lists',
-    # 'comparisons',
-    # 'types_',
-    # 'methods',
-    # 'list_comprehensions',
-    'f_strings'
+    'string_indexing',
+    'string_slicing',
+    'arithmetic_operators',
+    'variables',
+    'string_operators',
+    'quotation_marks',
+    'calling_functions',
+    'lists',
+    'comparisons',
+    'types_',
+    'methods',
+    'list_comprehensions',
+    'f_strings',
+    'sets'
     ]
 pdf = MarkdownPdf()
 solutions = []
