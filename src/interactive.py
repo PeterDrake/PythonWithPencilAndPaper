@@ -1,3 +1,4 @@
+import ast
 import os
 import re
 
@@ -85,6 +86,17 @@ def phase3(exercises, answers):
     return answers
 
 
+def answers_match(correct, user):
+    if correct == user:
+        return True
+    try:
+        correct_val = ast.literal_eval(correct)
+        user_val = ast.literal_eval(user)
+        return type(correct_val) == type(user_val) and correct_val == user_val
+    except (ValueError, SyntaxError):
+        return False
+
+
 def phase4(exercises, answers):
     print("\n=== Results ===\n")
     correct = 0
@@ -92,9 +104,9 @@ def phase4(exercises, answers):
     for ex in exercises:
         prompt_exercise(ex)
         user_ans = answers[ex['number']]
-        if user_ans == ex['answer']:
+        if answers_match(ex['answer'], user_ans):
             correct += 1
-            print(f"  Correct! ({ex['answer']})")
+            print(f"  Correct! {ex['answer']}")
         else:
             print(f"  Correct answer: {ex['answer']}")
             if user_ans is not None:
