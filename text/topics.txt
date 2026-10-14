@@ -1,24 +1,23 @@
-string indexing
-string slicing
-arithmetic operators
+string_indexing
+string_slicing
+arithmetic_operators
 variables
-string operators
-quotation marks
-calling functions (len, abs, etc.)
-lists (showing access, slicing, and operators work just like they do for strings)
-comparisons (including ==, introducing bools)
-types
+string_operators
+quotation_marks
+calling_functions
+lists
+comparisons
+types_
 methods
-list comprehensions
-f-strings
+list_comprehensions
+f_strings
 sets
 dictionaries
 equality
-tuples (including (un)packing)
-defining functions
+tuples
+defining_functions
 if
 while
 for
-break and continue
+break_continue
 importing
-numpy
